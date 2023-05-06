@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, Button, Table, Input } from 'antd';
+import LoginForm from './LoginForm';
 
 const { Search } = Input;
 
@@ -9,6 +10,7 @@ const DocumentManagement = () => {
   const [searchValue, setSearchValue] = useState('');
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   const columns = [
     {
@@ -88,6 +90,24 @@ const DocumentManagement = () => {
     setSortColumn(sorter.columnKey);
     setSortOrder(sorter.order);
   };
+
+  const handleLogin = (token) => {
+    setToken(token);
+  };
+
+  const isLoggedIn = () => {
+    try {
+      jwt.verify(token, 'secret-key');
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
+  if (!isLoggedIn()) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
 
   return (
     <>

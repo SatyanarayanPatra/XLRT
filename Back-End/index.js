@@ -8,12 +8,15 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('<your MongoDB Atlas connection string>', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  'mongodb+srv://satya77888narayanpatra:Satya1234@cluster0.mubmhrt.mongodb.net/?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
 
 const documentSchema = new mongoose.Schema({
   name: {
